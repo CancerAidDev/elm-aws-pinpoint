@@ -8,7 +8,7 @@ module AWS.Pinpoint exposing
     , PublicEndpoint
     , PutEventsRequest, PutEventsResponse
     , Session
-    , UpdateEndpointRequest
+    , UpdateEndpointRequest, UpdateEndpointResponse
     )
 
 {-|
@@ -58,8 +58,10 @@ import Json.Decode.Pipeline as Pipeline
 -}
 service : AWS.Config.Region -> AWS.Service.Service
 service region =
-    AWS.Config.defineRegional "pinpoint" "2016-12-01" AWS.Config.JSON AWS.Config.SignV4 region
+    AWS.Config.defineRegional "pinpoint" "2016-12-01" AWS.Config.REST_JSON AWS.Config.SignV4 region
         |> AWS.Config.withJsonVersion "1.1"
+        |> AWS.Config.withTargetPrefix "Pinpoint"
+        |> AWS.Config.withSigningName "mobiletargeting"
         |> AWS.Service.service
 
 
@@ -72,7 +74,7 @@ updateEndpoint req =
             req.endpointRequest |> Codec.encoder endpointRequestCodec |> AWS.Http.jsonBody
 
         url =
-            "v1/app/" ++ req.applicationId ++ "/endpoints/" ++ req.endpointId
+            "/v1/apps/" ++ req.applicationId ++ "/endpoints/" ++ req.endpointId
 
         decoder =
             Json.Decode.succeed UpdateEndpointResponse
@@ -91,14 +93,14 @@ putEvents req =
             req.eventsRequest |> Codec.encoder eventsRequestCodec |> AWS.Http.jsonBody
 
         url =
-            "v1/app/" ++ req.applicationId ++ "/events"
+            "/v1/apps/" ++ req.applicationId ++ "/events"
 
         decoder =
             Json.Decode.succeed PutEventsResponse
                 |> Pipeline.optional "EventsResponse" (Json.Decode.maybe (Codec.decoder eventsResponseCodec)) Nothing
                 |> AWS.Http.jsonBodyDecoder
     in
-    AWS.Http.request "PutEvents" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
+    AWS.Http.request "PutEvents" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
 
 
 {-| The UpdateEndpointRequest data model.
@@ -406,8 +408,8 @@ type alias EndpointUser =
 endpointUserCodec : Codec EndpointUser
 endpointUserCodec =
     Codec.object EndpointUser
-        |> Codec.optionalField "userAttributes" .userAttributes attributesCodec
-        |> Codec.optionalField "userId" .userId Codec.string
+        |> Codec.optionalField "UserAttributes" .userAttributes attributesCodec
+        |> Codec.optionalField "UserId" .userId Codec.string
         |> Codec.buildObject
 
 
