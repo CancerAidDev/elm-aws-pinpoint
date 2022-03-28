@@ -169,7 +169,6 @@ module AWS.Pinpoint exposing
 
 import AWS.Config
 import AWS.Http
-import AWS.KVDecode exposing (KVDecoder)
 import AWS.KVEncode exposing (KVPairs)
 import AWS.Service
 import Codec exposing (Codec)
@@ -196,12 +195,8 @@ service region =
 updateVoiceChannel : UpdateVoiceChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateVoiceChannelResponse
 updateVoiceChannel req =
     let
-        encoder val =
-            [ ( "VoiceChannelRequest", val.voiceChannelRequest ) |> EncodeOpt.field voiceChannelRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.voiceChannelRequest |> voiceChannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/voice"
@@ -219,12 +214,8 @@ updateVoiceChannel req =
 updateSmsChannel : UpdateSmsChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateSmsChannelResponse
 updateSmsChannel req =
     let
-        encoder val =
-            [ ( "SMSChannelRequest", val.smschannelRequest ) |> EncodeOpt.field smschannelRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.smschannelRequest |> smschannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/sms"
@@ -242,12 +233,8 @@ updateSmsChannel req =
 updateSegment : UpdateSegmentRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateSegmentResponse
 updateSegment req =
     let
-        encoder val =
-            [ ( "WriteSegmentRequest", val.writeSegmentRequest ) |> EncodeOpt.field writeSegmentRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.writeSegmentRequest |> writeSegmentRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/segments/" ++ req.segmentId
@@ -265,12 +252,8 @@ updateSegment req =
 updateGcmChannel : UpdateGcmChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateGcmChannelResponse
 updateGcmChannel req =
     let
-        encoder val =
-            [ ( "GCMChannelRequest", val.gcmchannelRequest ) |> EncodeOpt.field gcmchannelRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.gcmchannelRequest |> gcmchannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/gcm"
@@ -288,12 +271,8 @@ updateGcmChannel req =
 updateEndpointsBatch : UpdateEndpointsBatchRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateEndpointsBatchResponse
 updateEndpointsBatch req =
     let
-        encoder val =
-            [ ( "EndpointBatchRequest", val.endpointBatchRequest ) |> EncodeOpt.field endpointBatchRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.endpointBatchRequest |> endpointBatchRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/endpoints"
@@ -311,12 +290,8 @@ updateEndpointsBatch req =
 updateEndpoint : UpdateEndpointRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateEndpointResponse
 updateEndpoint req =
     let
-        encoder val =
-            [ ( "EndpointRequest", val.endpointRequest ) |> EncodeOpt.field endpointRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.endpointRequest |> endpointRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/endpoints/" ++ req.endpointId
@@ -334,12 +309,8 @@ updateEndpoint req =
 updateEmailChannel : UpdateEmailChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateEmailChannelResponse
 updateEmailChannel req =
     let
-        encoder val =
-            [ ( "EmailChannelRequest", val.emailChannelRequest ) |> EncodeOpt.field emailChannelRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.emailChannelRequest |> emailChannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/email"
@@ -357,12 +328,8 @@ updateEmailChannel req =
 updateCampaign : UpdateCampaignRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateCampaignResponse
 updateCampaign req =
     let
-        encoder val =
-            [ ( "WriteCampaignRequest", val.writeCampaignRequest ) |> EncodeOpt.field writeCampaignRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.writeCampaignRequest |> writeCampaignRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/campaigns/" ++ req.campaignId
@@ -380,12 +347,8 @@ updateCampaign req =
 updateBaiduChannel : UpdateBaiduChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateBaiduChannelResponse
 updateBaiduChannel req =
     let
-        encoder val =
-            [ ( "BaiduChannelRequest", val.baiduChannelRequest ) |> EncodeOpt.field baiduChannelRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.baiduChannelRequest |> baiduChannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/baidu"
@@ -403,14 +366,8 @@ updateBaiduChannel req =
 updateApplicationSettings : UpdateApplicationSettingsRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateApplicationSettingsResponse
 updateApplicationSettings req =
     let
-        encoder val =
-            [ ( "WriteApplicationSettingsRequest", val.writeApplicationSettingsRequest )
-                |> EncodeOpt.field writeApplicationSettingsRequestEncoder
-            ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.writeApplicationSettingsRequest |> writeApplicationSettingsRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/settings"
@@ -430,14 +387,8 @@ updateApplicationSettings req =
 updateApnsVoipSandboxChannel : UpdateApnsVoipSandboxChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateApnsVoipSandboxChannelResponse
 updateApnsVoipSandboxChannel req =
     let
-        encoder val =
-            [ ( "APNSVoipSandboxChannelRequest", val.apnsvoipSandboxChannelRequest )
-                |> EncodeOpt.field apnsvoipSandboxChannelRequestEncoder
-            ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.apnsvoipSandboxChannelRequest |> apnsvoipSandboxChannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/apns"
@@ -459,13 +410,8 @@ updateApnsVoipSandboxChannel req =
 updateApnsVoipChannel : UpdateApnsVoipChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateApnsVoipChannelResponse
 updateApnsVoipChannel req =
     let
-        encoder val =
-            [ ( "APNSVoipChannelRequest", val.apnsvoipChannelRequest ) |> EncodeOpt.field apnsvoipChannelRequestEncoder
-            ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.apnsvoipChannelRequest |> apnsvoipChannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/apns"
@@ -485,14 +431,8 @@ updateApnsVoipChannel req =
 updateApnsSandboxChannel : UpdateApnsSandboxChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateApnsSandboxChannelResponse
 updateApnsSandboxChannel req =
     let
-        encoder val =
-            [ ( "APNSSandboxChannelRequest", val.apnssandboxChannelRequest )
-                |> EncodeOpt.field apnssandboxChannelRequestEncoder
-            ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.apnssandboxChannelRequest |> apnssandboxChannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/apns"
@@ -512,12 +452,8 @@ updateApnsSandboxChannel req =
 updateApnsChannel : UpdateApnsChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateApnsChannelResponse
 updateApnsChannel req =
     let
-        encoder val =
-            [ ( "APNSChannelRequest", val.apnschannelRequest ) |> EncodeOpt.field apnschannelRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.apnschannelRequest |> apnschannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/apns"
@@ -535,12 +471,8 @@ updateApnsChannel req =
 updateAdmChannel : UpdateAdmChannelRequest -> AWS.Http.Request AWS.Http.AWSAppError UpdateAdmChannelResponse
 updateAdmChannel req =
     let
-        encoder val =
-            [ ( "ADMChannelRequest", val.admchannelRequest ) |> EncodeOpt.field admchannelRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.admchannelRequest |> admchannelRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/channels/adm"
@@ -579,12 +511,8 @@ untagResource req =
 tagResource : TagResourceRequest -> AWS.Http.Request Never ()
 tagResource req =
     let
-        encoder val =
-            [ ( "TagsModel", val.tagsModel ) |> EncodeOpt.field (Codec.encoder tagsModelCodec) ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.tagsModel |> Codec.encoder tagsModelCodec |> AWS.Http.jsonBody
 
         url =
             "/v1/tags/" ++ req.resourceArn
@@ -600,14 +528,8 @@ tagResource req =
 sendUsersMessages : SendUsersMessagesRequest -> AWS.Http.Request AWS.Http.AWSAppError SendUsersMessagesResponse
 sendUsersMessages req =
     let
-        encoder val =
-            [ ( "SendUsersMessageRequest", val.sendUsersMessageRequest )
-                |> EncodeOpt.field sendUsersMessageRequestEncoder
-            ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.sendUsersMessageRequest |> sendUsersMessageRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/users-messages"
@@ -627,12 +549,8 @@ sendUsersMessages req =
 sendMessages : SendMessagesRequest -> AWS.Http.Request AWS.Http.AWSAppError SendMessagesResponse
 sendMessages req =
     let
-        encoder val =
-            [ ( "MessageRequest", val.messageRequest ) |> EncodeOpt.field messageRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.messageRequest |> messageRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/messages"
@@ -650,14 +568,8 @@ sendMessages req =
 removeAttributes : RemoveAttributesRequest -> AWS.Http.Request AWS.Http.AWSAppError RemoveAttributesResponse
 removeAttributes req =
     let
-        encoder val =
-            [ ( "UpdateAttributesRequest", val.updateAttributesRequest )
-                |> EncodeOpt.field updateAttributesRequestEncoder
-            ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.updateAttributesRequest |> updateAttributesRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/attributes/" ++ req.attributeType
@@ -675,12 +587,8 @@ removeAttributes req =
 putEvents : PutEventsRequest -> AWS.Http.Request AWS.Http.AWSAppError PutEventsResponse
 putEvents req =
     let
-        encoder val =
-            [ ( "EventsRequest", val.eventsRequest ) |> EncodeOpt.field eventsRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.eventsRequest |> eventsRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/events"
@@ -698,12 +606,8 @@ putEvents req =
 putEventStream : PutEventStreamRequest -> AWS.Http.Request AWS.Http.AWSAppError PutEventStreamResponse
 putEventStream req =
     let
-        encoder val =
-            [ ( "WriteEventStream", val.writeEventStream ) |> EncodeOpt.field writeEventStreamEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.writeEventStream |> writeEventStreamEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/eventstream"
@@ -721,12 +625,8 @@ putEventStream req =
 phoneNumberValidate : PhoneNumberValidateRequest -> AWS.Http.Request AWS.Http.AWSAppError PhoneNumberValidateResponse
 phoneNumberValidate req =
     let
-        encoder val =
-            [ ( "NumberValidateRequest", val.numberValidateRequest ) |> EncodeOpt.field numberValidateRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.numberValidateRequest |> numberValidateRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/phone/number/validate"
@@ -823,8 +723,8 @@ getSegments : GetSegmentsRequest -> AWS.Http.Request AWS.Http.AWSAppError GetSeg
 getSegments req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -849,8 +749,8 @@ getSegmentVersions : GetSegmentVersionsRequest -> AWS.Http.Request AWS.Http.AWSA
 getSegmentVersions req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -894,8 +794,8 @@ getSegmentImportJobs : GetSegmentImportJobsRequest -> AWS.Http.Request AWS.Http.
 getSegmentImportJobs req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -920,8 +820,8 @@ getSegmentExportJobs : GetSegmentExportJobsRequest -> AWS.Http.Request AWS.Http.
 getSegmentExportJobs req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -965,8 +865,8 @@ getImportJobs : GetImportJobsRequest -> AWS.Http.Request AWS.Http.AWSAppError Ge
 getImportJobs req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1029,8 +929,8 @@ getExportJobs : GetExportJobsRequest -> AWS.Http.Request AWS.Http.AWSAppError Ge
 getExportJobs req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1150,8 +1050,8 @@ getCampaigns : GetCampaignsRequest -> AWS.Http.Request AWS.Http.AWSAppError GetC
 getCampaigns req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1176,8 +1076,8 @@ getCampaignVersions : GetCampaignVersionsRequest -> AWS.Http.Request AWS.Http.AW
 getCampaignVersions req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1221,10 +1121,10 @@ getCampaignDateRangeKpi : GetCampaignDateRangeKpiRequest -> AWS.Http.Request AWS
 getCampaignDateRangeKpi req =
     let
         queryEncoder val =
-            [ ( "start-time", val.startTime ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "next-token", val.nextToken ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "end-time", val.endTime ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "start-time", val.startTime ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "next-token", val.nextToken ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "end-time", val.endTime ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1251,8 +1151,8 @@ getCampaignActivities : GetCampaignActivitiesRequest -> AWS.Http.Request AWS.Htt
 getCampaignActivities req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1315,8 +1215,8 @@ getApps : GetAppsRequest -> AWS.Http.Request AWS.Http.AWSAppError GetAppsRespons
 getApps req =
     let
         queryEncoder val =
-            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "token", val.token ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1362,10 +1262,10 @@ getApplicationDateRangeKpi : GetApplicationDateRangeKpiRequest -> AWS.Http.Reque
 getApplicationDateRangeKpi req =
     let
         queryEncoder val =
-            [ ( "start-time", val.startTime ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "next-token", val.nextToken ) |> AWS.KVEncode.optional AWS.KVEncode.string val
-            , ( "end-time", val.endTime ) |> AWS.KVEncode.optional AWS.KVEncode.string val
+            [ ( "start-time", val.startTime ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "page-size", val.pageSize ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "next-token", val.nextToken ) |> AWS.KVEncode.optional AWS.KVEncode.string
+            , ( "end-time", val.endTime ) |> AWS.KVEncode.optional AWS.KVEncode.string
             ]
                 |> AWS.KVEncode.object
 
@@ -1827,12 +1727,8 @@ deleteAdmChannel req =
 createSegment : CreateSegmentRequest -> AWS.Http.Request AWS.Http.AWSAppError CreateSegmentResponse
 createSegment req =
     let
-        encoder val =
-            [ ( "WriteSegmentRequest", val.writeSegmentRequest ) |> EncodeOpt.field writeSegmentRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.writeSegmentRequest |> writeSegmentRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/segments"
@@ -1850,12 +1746,8 @@ createSegment req =
 createImportJob : CreateImportJobRequest -> AWS.Http.Request AWS.Http.AWSAppError CreateImportJobResponse
 createImportJob req =
     let
-        encoder val =
-            [ ( "ImportJobRequest", val.importJobRequest ) |> EncodeOpt.field importJobRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.importJobRequest |> importJobRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/jobs/import"
@@ -1873,12 +1765,8 @@ createImportJob req =
 createExportJob : CreateExportJobRequest -> AWS.Http.Request AWS.Http.AWSAppError CreateExportJobResponse
 createExportJob req =
     let
-        encoder val =
-            [ ( "ExportJobRequest", val.exportJobRequest ) |> EncodeOpt.field exportJobRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.exportJobRequest |> exportJobRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/jobs/export"
@@ -1896,12 +1784,8 @@ createExportJob req =
 createCampaign : CreateCampaignRequest -> AWS.Http.Request AWS.Http.AWSAppError CreateCampaignResponse
 createCampaign req =
     let
-        encoder val =
-            [ ( "WriteCampaignRequest", val.writeCampaignRequest ) |> EncodeOpt.field writeCampaignRequestEncoder ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.writeCampaignRequest |> writeCampaignRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps/" ++ req.applicationId ++ "/campaigns"
@@ -1919,14 +1803,8 @@ createCampaign req =
 createApp : CreateAppRequest -> AWS.Http.Request AWS.Http.AWSAppError CreateAppResponse
 createApp req =
     let
-        encoder val =
-            [ ( "CreateApplicationRequest", val.createApplicationRequest )
-                |> EncodeOpt.field createApplicationRequestEncoder
-            ]
-                |> EncodeOpt.objectMaySkip
-
         jsonBody =
-            req |> encoder |> AWS.Http.jsonBody
+            req.createApplicationRequest |> createApplicationRequestEncoder |> AWS.Http.jsonBody
 
         url =
             "/v1/apps"
@@ -6937,4 +6815,4 @@ writeTreatmentResourceEncoder val =
 -}
 listOfStringKVEncoder : ListOfString -> KVPairs
 listOfStringKVEncoder val =
-    AWS.KVEncode.list AWS.KVEncode.string val val
+    AWS.KVEncode.list AWS.KVEncode.string val
