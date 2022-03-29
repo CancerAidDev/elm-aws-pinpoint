@@ -3,7 +3,7 @@
     "name": "canceraiddev/elm-aws-pinpoint",
     "summary": "Elm client for the AWS Pinpoint services.",
     "license": "Apache-2.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "exposed-modules": [
         "AWS.Pinpoint"
     ],
