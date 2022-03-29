@@ -203,7 +203,7 @@ updateVoiceChannel req =
 
         decoder =
             voiceChannelResponseDecoder
-                |> Json.Decode.andThen (\voiceChannelResponseFld -> { voiceChannelResponse = voiceChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\voiceChannelResponseFld -> { voiceChannelResponse = voiceChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateVoiceChannel" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -222,7 +222,7 @@ updateSmsChannel req =
 
         decoder =
             smschannelResponseDecoder
-                |> Json.Decode.andThen (\smschannelResponseFld -> { smschannelResponse = smschannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\smschannelResponseFld -> { smschannelResponse = smschannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateSmsChannel" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -241,7 +241,7 @@ updateSegment req =
 
         decoder =
             segmentResponseDecoder
-                |> Json.Decode.andThen (\segmentResponseFld -> { segmentResponse = segmentResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\segmentResponseFld -> { segmentResponse = segmentResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateSegment" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -260,7 +260,7 @@ updateGcmChannel req =
 
         decoder =
             gcmchannelResponseDecoder
-                |> Json.Decode.andThen (\gcmchannelResponseFld -> { gcmchannelResponse = gcmchannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\gcmchannelResponseFld -> { gcmchannelResponse = gcmchannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateGcmChannel" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -279,7 +279,7 @@ updateEndpointsBatch req =
 
         decoder =
             messageBodyDecoder
-                |> Json.Decode.andThen (\messageBodyFld -> { messageBody = messageBodyFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\messageBodyFld -> { messageBody = messageBodyFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateEndpointsBatch" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -298,7 +298,7 @@ updateEndpoint req =
 
         decoder =
             messageBodyDecoder
-                |> Json.Decode.andThen (\messageBodyFld -> { messageBody = messageBodyFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\messageBodyFld -> { messageBody = messageBodyFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateEndpoint" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -317,7 +317,7 @@ updateEmailChannel req =
 
         decoder =
             emailChannelResponseDecoder
-                |> Json.Decode.andThen (\emailChannelResponseFld -> { emailChannelResponse = emailChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\emailChannelResponseFld -> { emailChannelResponse = emailChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateEmailChannel" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -336,7 +336,7 @@ updateCampaign req =
 
         decoder =
             campaignResponseDecoder
-                |> Json.Decode.andThen (\campaignResponseFld -> { campaignResponse = campaignResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\campaignResponseFld -> { campaignResponse = campaignResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateCampaign" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -355,7 +355,7 @@ updateBaiduChannel req =
 
         decoder =
             baiduChannelResponseDecoder
-                |> Json.Decode.andThen (\baiduChannelResponseFld -> { baiduChannelResponse = baiduChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\baiduChannelResponseFld -> { baiduChannelResponse = baiduChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateBaiduChannel" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -374,10 +374,9 @@ updateApplicationSettings req =
 
         decoder =
             applicationSettingsResourceDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\applicationSettingsResourceFld ->
                         { applicationSettingsResource = applicationSettingsResourceFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -397,10 +396,9 @@ updateApnsVoipSandboxChannel req =
 
         decoder =
             apnsvoipSandboxChannelResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\apnsvoipSandboxChannelResponseFld ->
                         { apnsvoipSandboxChannelResponse = apnsvoipSandboxChannelResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -420,10 +418,9 @@ updateApnsVoipChannel req =
 
         decoder =
             apnsvoipChannelResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\apnsvoipChannelResponseFld ->
                         { apnsvoipChannelResponse = apnsvoipChannelResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -443,10 +440,9 @@ updateApnsSandboxChannel req =
 
         decoder =
             apnssandboxChannelResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\apnssandboxChannelResponseFld ->
                         { apnssandboxChannelResponse = apnssandboxChannelResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -466,7 +462,7 @@ updateApnsChannel req =
 
         decoder =
             apnschannelResponseDecoder
-                |> Json.Decode.andThen (\apnschannelResponseFld -> { apnschannelResponse = apnschannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\apnschannelResponseFld -> { apnschannelResponse = apnschannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateApnsChannel" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -485,7 +481,7 @@ updateAdmChannel req =
 
         decoder =
             admchannelResponseDecoder
-                |> Json.Decode.andThen (\admchannelResponseFld -> { admchannelResponse = admchannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\admchannelResponseFld -> { admchannelResponse = admchannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "UpdateAdmChannel" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -542,10 +538,9 @@ sendUsersMessages req =
 
         decoder =
             sendUsersMessageResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\sendUsersMessageResponseFld ->
                         { sendUsersMessageResponse = sendUsersMessageResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -565,7 +560,7 @@ sendMessages req =
 
         decoder =
             messageResponseDecoder
-                |> Json.Decode.andThen (\messageResponseFld -> { messageResponse = messageResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\messageResponseFld -> { messageResponse = messageResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "SendMessages" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -584,7 +579,7 @@ removeAttributes req =
 
         decoder =
             attributesResourceDecoder
-                |> Json.Decode.andThen (\attributesResourceFld -> { attributesResource = attributesResourceFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\attributesResourceFld -> { attributesResource = attributesResourceFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "RemoveAttributes" AWS.Http.PUT url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -603,7 +598,7 @@ putEvents req =
 
         decoder =
             eventsResponseDecoder
-                |> Json.Decode.andThen (\eventsResponseFld -> { eventsResponse = eventsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\eventsResponseFld -> { eventsResponse = eventsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "PutEvents" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -622,7 +617,7 @@ putEventStream req =
 
         decoder =
             eventStreamDecoder
-                |> Json.Decode.andThen (\eventStreamFld -> { eventStream = eventStreamFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\eventStreamFld -> { eventStream = eventStreamFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "PutEventStream" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -641,10 +636,9 @@ phoneNumberValidate req =
 
         decoder =
             numberValidateResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\numberValidateResponseFld ->
                         { numberValidateResponse = numberValidateResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -664,7 +658,7 @@ listTagsForResource req =
 
         decoder =
             Codec.decoder tagsModelCodec
-                |> Json.Decode.andThen (\tagsModelFld -> { tagsModel = tagsModelFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\tagsModelFld -> { tagsModel = tagsModelFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "ListTagsForResource" AWS.Http.GET url jsonBody decoder AWS.Http.neverAppErrDecoder
@@ -683,7 +677,7 @@ getVoiceChannel req =
 
         decoder =
             voiceChannelResponseDecoder
-                |> Json.Decode.andThen (\voiceChannelResponseFld -> { voiceChannelResponse = voiceChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\voiceChannelResponseFld -> { voiceChannelResponse = voiceChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetVoiceChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -702,7 +696,7 @@ getUserEndpoints req =
 
         decoder =
             endpointsResponseDecoder
-                |> Json.Decode.andThen (\endpointsResponseFld -> { endpointsResponse = endpointsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\endpointsResponseFld -> { endpointsResponse = endpointsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetUserEndpoints" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -721,7 +715,7 @@ getSmsChannel req =
 
         decoder =
             smschannelResponseDecoder
-                |> Json.Decode.andThen (\smschannelResponseFld -> { smschannelResponse = smschannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\smschannelResponseFld -> { smschannelResponse = smschannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetSmsChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -746,7 +740,7 @@ getSegments req =
 
         decoder =
             segmentsResponseDecoder
-                |> Json.Decode.andThen (\segmentsResponseFld -> { segmentsResponse = segmentsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\segmentsResponseFld -> { segmentsResponse = segmentsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetSegments" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -772,7 +766,7 @@ getSegmentVersions req =
 
         decoder =
             segmentsResponseDecoder
-                |> Json.Decode.andThen (\segmentsResponseFld -> { segmentsResponse = segmentsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\segmentsResponseFld -> { segmentsResponse = segmentsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetSegmentVersions" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -792,7 +786,7 @@ getSegmentVersion req =
 
         decoder =
             segmentResponseDecoder
-                |> Json.Decode.andThen (\segmentResponseFld -> { segmentResponse = segmentResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\segmentResponseFld -> { segmentResponse = segmentResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetSegmentVersion" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -817,7 +811,7 @@ getSegmentImportJobs req =
 
         decoder =
             importJobsResponseDecoder
-                |> Json.Decode.andThen (\importJobsResponseFld -> { importJobsResponse = importJobsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\importJobsResponseFld -> { importJobsResponse = importJobsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetSegmentImportJobs" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -843,7 +837,7 @@ getSegmentExportJobs req =
 
         decoder =
             exportJobsResponseDecoder
-                |> Json.Decode.andThen (\exportJobsResponseFld -> { exportJobsResponse = exportJobsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\exportJobsResponseFld -> { exportJobsResponse = exportJobsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetSegmentExportJobs" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -863,7 +857,7 @@ getSegment req =
 
         decoder =
             segmentResponseDecoder
-                |> Json.Decode.andThen (\segmentResponseFld -> { segmentResponse = segmentResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\segmentResponseFld -> { segmentResponse = segmentResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetSegment" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -888,7 +882,7 @@ getImportJobs req =
 
         decoder =
             importJobsResponseDecoder
-                |> Json.Decode.andThen (\importJobsResponseFld -> { importJobsResponse = importJobsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\importJobsResponseFld -> { importJobsResponse = importJobsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetImportJobs" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -908,7 +902,7 @@ getImportJob req =
 
         decoder =
             importJobResponseDecoder
-                |> Json.Decode.andThen (\importJobResponseFld -> { importJobResponse = importJobResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\importJobResponseFld -> { importJobResponse = importJobResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetImportJob" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -927,7 +921,7 @@ getGcmChannel req =
 
         decoder =
             gcmchannelResponseDecoder
-                |> Json.Decode.andThen (\gcmchannelResponseFld -> { gcmchannelResponse = gcmchannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\gcmchannelResponseFld -> { gcmchannelResponse = gcmchannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetGcmChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -952,7 +946,7 @@ getExportJobs req =
 
         decoder =
             exportJobsResponseDecoder
-                |> Json.Decode.andThen (\exportJobsResponseFld -> { exportJobsResponse = exportJobsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\exportJobsResponseFld -> { exportJobsResponse = exportJobsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetExportJobs" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -972,7 +966,7 @@ getExportJob req =
 
         decoder =
             exportJobResponseDecoder
-                |> Json.Decode.andThen (\exportJobResponseFld -> { exportJobResponse = exportJobResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\exportJobResponseFld -> { exportJobResponse = exportJobResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetExportJob" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -991,7 +985,7 @@ getEventStream req =
 
         decoder =
             eventStreamDecoder
-                |> Json.Decode.andThen (\eventStreamFld -> { eventStream = eventStreamFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\eventStreamFld -> { eventStream = eventStreamFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetEventStream" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1010,7 +1004,7 @@ getEndpoint req =
 
         decoder =
             endpointResponseDecoder
-                |> Json.Decode.andThen (\endpointResponseFld -> { endpointResponse = endpointResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\endpointResponseFld -> { endpointResponse = endpointResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetEndpoint" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1029,7 +1023,7 @@ getEmailChannel req =
 
         decoder =
             emailChannelResponseDecoder
-                |> Json.Decode.andThen (\emailChannelResponseFld -> { emailChannelResponse = emailChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\emailChannelResponseFld -> { emailChannelResponse = emailChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetEmailChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1048,7 +1042,7 @@ getChannels req =
 
         decoder =
             channelsResponseDecoder
-                |> Json.Decode.andThen (\channelsResponseFld -> { channelsResponse = channelsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\channelsResponseFld -> { channelsResponse = channelsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetChannels" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1073,7 +1067,7 @@ getCampaigns req =
 
         decoder =
             campaignsResponseDecoder
-                |> Json.Decode.andThen (\campaignsResponseFld -> { campaignsResponse = campaignsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\campaignsResponseFld -> { campaignsResponse = campaignsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetCampaigns" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1099,7 +1093,7 @@ getCampaignVersions req =
 
         decoder =
             campaignsResponseDecoder
-                |> Json.Decode.andThen (\campaignsResponseFld -> { campaignsResponse = campaignsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\campaignsResponseFld -> { campaignsResponse = campaignsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetCampaignVersions" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1119,7 +1113,7 @@ getCampaignVersion req =
 
         decoder =
             campaignResponseDecoder
-                |> Json.Decode.andThen (\campaignResponseFld -> { campaignResponse = campaignResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\campaignResponseFld -> { campaignResponse = campaignResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetCampaignVersion" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1146,10 +1140,9 @@ getCampaignDateRangeKpi req =
 
         decoder =
             campaignDateRangeKpiResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\campaignDateRangeKpiResponseFld ->
                         { campaignDateRangeKpiResponse = campaignDateRangeKpiResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -1176,7 +1169,7 @@ getCampaignActivities req =
 
         decoder =
             activitiesResponseDecoder
-                |> Json.Decode.andThen (\activitiesResponseFld -> { activitiesResponse = activitiesResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\activitiesResponseFld -> { activitiesResponse = activitiesResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetCampaignActivities" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1196,7 +1189,7 @@ getCampaign req =
 
         decoder =
             campaignResponseDecoder
-                |> Json.Decode.andThen (\campaignResponseFld -> { campaignResponse = campaignResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\campaignResponseFld -> { campaignResponse = campaignResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetCampaign" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1215,7 +1208,7 @@ getBaiduChannel req =
 
         decoder =
             baiduChannelResponseDecoder
-                |> Json.Decode.andThen (\baiduChannelResponseFld -> { baiduChannelResponse = baiduChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\baiduChannelResponseFld -> { baiduChannelResponse = baiduChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetBaiduChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1240,7 +1233,7 @@ getApps req =
 
         decoder =
             applicationsResponseDecoder
-                |> Json.Decode.andThen (\applicationsResponseFld -> { applicationsResponse = applicationsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\applicationsResponseFld -> { applicationsResponse = applicationsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetApps" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1260,10 +1253,9 @@ getApplicationSettings req =
 
         decoder =
             applicationSettingsResourceDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\applicationSettingsResourceFld ->
                         { applicationSettingsResource = applicationSettingsResourceFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -1291,10 +1283,9 @@ getApplicationDateRangeKpi req =
 
         decoder =
             applicationDateRangeKpiResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\applicationDateRangeKpiResponseFld ->
                         { applicationDateRangeKpiResponse = applicationDateRangeKpiResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -1315,7 +1306,7 @@ getApp req =
 
         decoder =
             applicationResponseDecoder
-                |> Json.Decode.andThen (\applicationResponseFld -> { applicationResponse = applicationResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\applicationResponseFld -> { applicationResponse = applicationResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetApp" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1334,10 +1325,9 @@ getApnsVoipSandboxChannel req =
 
         decoder =
             apnsvoipSandboxChannelResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\apnsvoipSandboxChannelResponseFld ->
                         { apnsvoipSandboxChannelResponse = apnsvoipSandboxChannelResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -1357,11 +1347,7 @@ getApnsVoipChannel req =
 
         decoder =
             apnsvoipChannelResponseDecoder
-                |> Json.Decode.andThen
-                    (\apnsvoipChannelResponseFld ->
-                        { apnsvoipChannelResponse = apnsvoipChannelResponseFld }
-                            |> Json.Decode.succeed
-                    )
+                |> Json.Decode.map (\apnsvoipChannelResponseFld -> { apnsvoipChannelResponse = apnsvoipChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetApnsVoipChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1380,10 +1366,9 @@ getApnsSandboxChannel req =
 
         decoder =
             apnssandboxChannelResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\apnssandboxChannelResponseFld ->
                         { apnssandboxChannelResponse = apnssandboxChannelResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -1403,7 +1388,7 @@ getApnsChannel req =
 
         decoder =
             apnschannelResponseDecoder
-                |> Json.Decode.andThen (\apnschannelResponseFld -> { apnschannelResponse = apnschannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\apnschannelResponseFld -> { apnschannelResponse = apnschannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetApnsChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1422,7 +1407,7 @@ getAdmChannel req =
 
         decoder =
             admchannelResponseDecoder
-                |> Json.Decode.andThen (\admchannelResponseFld -> { admchannelResponse = admchannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\admchannelResponseFld -> { admchannelResponse = admchannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "GetAdmChannel" AWS.Http.GET url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1441,7 +1426,7 @@ deleteVoiceChannel req =
 
         decoder =
             voiceChannelResponseDecoder
-                |> Json.Decode.andThen (\voiceChannelResponseFld -> { voiceChannelResponse = voiceChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\voiceChannelResponseFld -> { voiceChannelResponse = voiceChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteVoiceChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1460,7 +1445,7 @@ deleteUserEndpoints req =
 
         decoder =
             endpointsResponseDecoder
-                |> Json.Decode.andThen (\endpointsResponseFld -> { endpointsResponse = endpointsResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\endpointsResponseFld -> { endpointsResponse = endpointsResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteUserEndpoints" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1479,7 +1464,7 @@ deleteSmsChannel req =
 
         decoder =
             smschannelResponseDecoder
-                |> Json.Decode.andThen (\smschannelResponseFld -> { smschannelResponse = smschannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\smschannelResponseFld -> { smschannelResponse = smschannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteSmsChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1498,7 +1483,7 @@ deleteSegment req =
 
         decoder =
             segmentResponseDecoder
-                |> Json.Decode.andThen (\segmentResponseFld -> { segmentResponse = segmentResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\segmentResponseFld -> { segmentResponse = segmentResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteSegment" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1517,7 +1502,7 @@ deleteGcmChannel req =
 
         decoder =
             gcmchannelResponseDecoder
-                |> Json.Decode.andThen (\gcmchannelResponseFld -> { gcmchannelResponse = gcmchannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\gcmchannelResponseFld -> { gcmchannelResponse = gcmchannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteGcmChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1536,7 +1521,7 @@ deleteEventStream req =
 
         decoder =
             eventStreamDecoder
-                |> Json.Decode.andThen (\eventStreamFld -> { eventStream = eventStreamFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\eventStreamFld -> { eventStream = eventStreamFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteEventStream" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1555,7 +1540,7 @@ deleteEndpoint req =
 
         decoder =
             endpointResponseDecoder
-                |> Json.Decode.andThen (\endpointResponseFld -> { endpointResponse = endpointResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\endpointResponseFld -> { endpointResponse = endpointResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteEndpoint" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1574,7 +1559,7 @@ deleteEmailChannel req =
 
         decoder =
             emailChannelResponseDecoder
-                |> Json.Decode.andThen (\emailChannelResponseFld -> { emailChannelResponse = emailChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\emailChannelResponseFld -> { emailChannelResponse = emailChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteEmailChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1593,7 +1578,7 @@ deleteCampaign req =
 
         decoder =
             campaignResponseDecoder
-                |> Json.Decode.andThen (\campaignResponseFld -> { campaignResponse = campaignResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\campaignResponseFld -> { campaignResponse = campaignResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteCampaign" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1612,7 +1597,7 @@ deleteBaiduChannel req =
 
         decoder =
             baiduChannelResponseDecoder
-                |> Json.Decode.andThen (\baiduChannelResponseFld -> { baiduChannelResponse = baiduChannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\baiduChannelResponseFld -> { baiduChannelResponse = baiduChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteBaiduChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1631,7 +1616,7 @@ deleteApp req =
 
         decoder =
             applicationResponseDecoder
-                |> Json.Decode.andThen (\applicationResponseFld -> { applicationResponse = applicationResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\applicationResponseFld -> { applicationResponse = applicationResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteApp" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1650,10 +1635,9 @@ deleteApnsVoipSandboxChannel req =
 
         decoder =
             apnsvoipSandboxChannelResponseDecoder
-                |> Json.Decode.andThen
+                |> Json.Decode.map
                     (\apnsvoipSandboxChannelResponseFld ->
                         { apnsvoipSandboxChannelResponse = apnsvoipSandboxChannelResponseFld }
-                            |> Json.Decode.succeed
                     )
                 |> AWS.Http.jsonBodyDecoder
     in
@@ -1673,11 +1657,7 @@ deleteApnsVoipChannel req =
 
         decoder =
             apnsvoipChannelResponseDecoder
-                |> Json.Decode.andThen
-                    (\apnsvoipChannelResponseFld ->
-                        { apnsvoipChannelResponse = apnsvoipChannelResponseFld }
-                            |> Json.Decode.succeed
-                    )
+                |> Json.Decode.map (\apnsvoipChannelResponseFld -> { apnsvoipChannelResponse = apnsvoipChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteApnsVoipChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1696,11 +1676,7 @@ deleteApnsSandboxChannel req =
 
         decoder =
             apnssandboxChannelResponseDecoder
-                |> Json.Decode.andThen
-                    (\apnssandboxChannelResponseFld ->
-                        { apnssandboxChannelResponse = apnssandboxChannelResponseFld }
-                            |> Json.Decode.succeed
-                    )
+                |> Json.Decode.map (\apnssandboxChannelResponseFld -> { apnssandboxChannelResponse = apnssandboxChannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteApnsSandboxChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1719,7 +1695,7 @@ deleteApnsChannel req =
 
         decoder =
             apnschannelResponseDecoder
-                |> Json.Decode.andThen (\apnschannelResponseFld -> { apnschannelResponse = apnschannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\apnschannelResponseFld -> { apnschannelResponse = apnschannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteApnsChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1738,7 +1714,7 @@ deleteAdmChannel req =
 
         decoder =
             admchannelResponseDecoder
-                |> Json.Decode.andThen (\admchannelResponseFld -> { admchannelResponse = admchannelResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\admchannelResponseFld -> { admchannelResponse = admchannelResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "DeleteAdmChannel" AWS.Http.DELETE url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1757,7 +1733,7 @@ createSegment req =
 
         decoder =
             segmentResponseDecoder
-                |> Json.Decode.andThen (\segmentResponseFld -> { segmentResponse = segmentResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\segmentResponseFld -> { segmentResponse = segmentResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "CreateSegment" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1776,7 +1752,7 @@ createImportJob req =
 
         decoder =
             importJobResponseDecoder
-                |> Json.Decode.andThen (\importJobResponseFld -> { importJobResponse = importJobResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\importJobResponseFld -> { importJobResponse = importJobResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "CreateImportJob" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1795,7 +1771,7 @@ createExportJob req =
 
         decoder =
             exportJobResponseDecoder
-                |> Json.Decode.andThen (\exportJobResponseFld -> { exportJobResponse = exportJobResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\exportJobResponseFld -> { exportJobResponse = exportJobResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "CreateExportJob" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1814,7 +1790,7 @@ createCampaign req =
 
         decoder =
             campaignResponseDecoder
-                |> Json.Decode.andThen (\campaignResponseFld -> { campaignResponse = campaignResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\campaignResponseFld -> { campaignResponse = campaignResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "CreateCampaign" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
@@ -1833,7 +1809,7 @@ createApp req =
 
         decoder =
             applicationResponseDecoder
-                |> Json.Decode.andThen (\applicationResponseFld -> { applicationResponse = applicationResponseFld } |> Json.Decode.succeed)
+                |> Json.Decode.map (\applicationResponseFld -> { applicationResponse = applicationResponseFld })
                 |> AWS.Http.jsonBodyDecoder
     in
     AWS.Http.request "CreateApp" AWS.Http.POST url jsonBody decoder AWS.Http.awsAppErrDecoder
